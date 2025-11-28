@@ -1,26 +1,89 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-italy-dark: #020A05;
+  --color-italy-card: rgba(255, 255, 255, 0.03);
+  --color-italy-neon-green: #00FF94;
+  --color-italy-neon-red: #FF2E4D;
+  --color-italy-text-muted: #9CA3AF;
+
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-outfit);
+
+  --animate-liquid: liquid 8s ease-in-out infinite;
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-pulse-slow: pulseSlow 4s ease-in-out infinite;
+
+  @keyframes liquid {
+
+    0%,
+    100% {
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+
+    50% {
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulseSlow {
+
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+
+    50% {
+      opacity: 0.7;
+    }
   }
 }
 
+:root {
+  --background: #020A05;
+  --foreground: #FFFFFF;
+  --font-inter: 'Inter', sans-serif;
+  --font-outfit: 'Outfit', sans-serif;
+}
+
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: var(--font-inter);
+  overflow-x: hidden;
+}
+
+@utility glass {
+  @apply bg-italy-card backdrop-blur-xl border border-white/5 shadow-2xl;
+}
+
+@utility glass-card {
+  @apply bg-[#111613] backdrop-blur-md border border-white/5 shadow-lg;
+}
+
+@utility glass-input {
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 focus:border-italy-neon-green/50 focus:ring-1 focus:ring-italy-neon-green/50 transition-all outline-none text-white placeholder:text-italy-text-muted;
+}
+
+@utility text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-italy-neon-green to-italy-neon-green;
+}
+
+@utility neon-shadow {
+  box-shadow: 0 0 20px -5px var(--color-italy-neon-green);
 }
