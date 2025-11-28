@@ -38,9 +38,9 @@ Usa un vocabolario ricco ma comprensibile per chi sta imparando.`;
             });
         }
 
-        // Call Google Cloud Generative Language API v1beta
+        // Call Google Generative Language API with Gemini 2.0 Flash
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${apiKey}`,
             {
                 method: "POST",
                 headers: {
@@ -50,7 +50,7 @@ Usa un vocabolario ricco ma comprensibile per chi sta imparando.`;
                     contents: contents,
                     generationConfig: {
                         temperature: 0.7,
-                        maxOutputTokens: 1024,
+                        maxOutputTokens: 2048,
                     },
                 }),
             }
@@ -70,7 +70,7 @@ Usa un vocabolario ricco ma comprensibile per chi sta imparando.`;
         console.error("Error details:", error?.message);
 
         return NextResponse.json({
-            content: `Mi dispiace, c'è stato un errore con l'API Gemini. Dettagli: ${error?.message || "Errore sconosciuto"}. Verifica che la tua chiave API Google Cloud sia valide et active.`,
+            content: `Mi dispiace, c'è stato un errore con l'API Gemini. Dettagli: ${error?.message || "Errore sconosciuto"}. Verifica che la tua chiave API sia valide.`,
         });
     }
 }
