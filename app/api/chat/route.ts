@@ -15,7 +15,7 @@ export async function POST(req: Request) {
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
         const systemPrompt = `Sei un'insegnante di italiano severa ma incoraggiante. 
     DEVI rispondere SEMPRE e SOLO in italiano, indipendentemente dalla lingua usata dall'utente. 
