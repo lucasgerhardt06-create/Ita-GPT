@@ -38,9 +38,9 @@ Usa un vocabolario ricco ma comprensibile per chi sta imparando.`;
             });
         }
 
-        // Call Google Cloud Generative Language API v1
+        // Call Google Cloud Generative Language API v1beta
         const response = await fetch(
-            `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${apiKey}`,
+            `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
             {
                 method: "POST",
                 headers: {
