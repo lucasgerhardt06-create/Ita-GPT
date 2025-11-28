@@ -24,9 +24,6 @@ export async function POST(req: Request) {
     Usa un vocabolario ricco ma comprensibile per chi sta imparando.`;
 
         // Convert messages to Gemini format
-        // Note: Gemini history format is slightly different, but for single turn or simple chat, we can construct the prompt.
-        // For better context, we should format the history.
-
         const chatHistory = messages.slice(0, -1).map((msg: any) => ({
             role: msg.role === "user" ? "user" : "model",
             parts: [{ text: msg.content }],
@@ -53,11 +50,13 @@ export async function POST(req: Request) {
         const content = response.text();
 
         return NextResponse.json({ content });
-    } catch (error) {
+    } catch (error: any) {
         console.error("Gemini API Error:", error);
-        return NextResponse.json(
-            { error: "Errore nella comunicazione con l'IA." },
-            { status: 500 }
-        );
+        console.error("Error details:", error?.message, error?.status);
+
+        // Return error as content so the frontend can display it
+        return NextResponse.json({
+            content: `Mi dispiace, c'è stato un errore con l'API Gemini. Dettagli: ${error?.message || "Errore sconosciuto"}. Verifica che la tua chiave API sia valida su Google AI Studio.`,
+        });
     }
 }
